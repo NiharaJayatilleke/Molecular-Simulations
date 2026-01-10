@@ -1,0 +1,38 @@
+{
+	"ConfigFile":	"../config/distance_30_60_120.txt",
+	"SEED":	1,
+	"NumRepeat":	1,
+	"StartTime":	"2025-10-24 16:21:44"
+}
+{
+	"NumberActiveRecord":	1,
+	"ActiveInfo":	[{
+			"ID":	0,
+			"MaxBitLength":	12
+		}],
+	"NumberPassiveRecord":	3,
+	"RecordInfo":	[{
+			"ID":	1,
+			"bRecordTime":	0,
+			"MaxCountLength":	1860,
+			"NumMolTypeObs":	1,
+			"MolObsID":	[0],
+			"bRecordPos":	[0]
+		}, {
+			"ID":	2,
+			"bRecordTime":	0,
+			"MaxCountLength":	1860,
+			"NumMolTypeObs":	1,
+			"MolObsID":	[0],
+			"bRecordPos":	[0]
+		}, {
+			"ID":	3,
+			"bRecordTime":	0,
+			"MaxCountLength":	1860,
+			"NumMolTypeObs":	1,
+			"MolObsID":	[0],
+			"bRecordPos":	[0]
+		}],
+	"EndTime":	"2025-10-24 16:50:32",
+	"RunTime":	414.116146
+}

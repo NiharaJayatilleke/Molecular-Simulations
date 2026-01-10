@@ -1,0 +1,24 @@
+{
+	"ConfigFile":	"accord_config_sample_crowding.txt",
+	"SEED":	1,
+	"NumRepeat":	1,
+	"StartTime":	"2025-06-11 09:22:00"
+}
+{
+	"NumberActiveRecord":	1,
+	"ActiveInfo":	[{
+			"ID":	0,
+			"MaxBitLength":	1
+		}],
+	"NumberPassiveRecord":	1,
+	"RecordInfo":	[{
+			"ID":	1,
+			"bRecordTime":	0,
+			"MaxCountLength":	500,
+			"NumMolTypeObs":	1,
+			"MolObsID":	[0],
+			"bRecordPos":	[1]
+		}],
+	"EndTime":	"2025-06-11 09:22:00",
+	"RunTime":	0.009996
+}

@@ -1,0 +1,83 @@
+{
+	"ConfigFile":	"accord_config_sample_all_shapes_micro.txt",
+	"SEED":	1,
+	"NumRepeat":	1,
+	"StartTime":	"2025-06-11 09:21:58"
+}
+{
+	"NumberActiveRecord":	2,
+	"ActiveInfo":	[{
+			"ID":	9,
+			"MaxBitLength":	1
+		}, {
+			"ID":	10,
+			"MaxBitLength":	1
+		}],
+	"NumberPassiveRecord":	9,
+	"RecordInfo":	[{
+			"ID":	0,
+			"bRecordTime":	0,
+			"MaxCountLength":	100,
+			"NumMolTypeObs":	2,
+			"MolObsID":	[0, 1],
+			"bRecordPos":	[0, 0]
+		}, {
+			"ID":	1,
+			"bRecordTime":	0,
+			"MaxCountLength":	100,
+			"NumMolTypeObs":	2,
+			"MolObsID":	[0, 1],
+			"bRecordPos":	[0, 0]
+		}, {
+			"ID":	2,
+			"bRecordTime":	0,
+			"MaxCountLength":	100,
+			"NumMolTypeObs":	2,
+			"MolObsID":	[0, 1],
+			"bRecordPos":	[0, 0]
+		}, {
+			"ID":	3,
+			"bRecordTime":	0,
+			"MaxCountLength":	100,
+			"NumMolTypeObs":	2,
+			"MolObsID":	[0, 1],
+			"bRecordPos":	[0, 0]
+		}, {
+			"ID":	4,
+			"bRecordTime":	0,
+			"MaxCountLength":	100,
+			"NumMolTypeObs":	2,
+			"MolObsID":	[0, 1],
+			"bRecordPos":	[0, 0]
+		}, {
+			"ID":	5,
+			"bRecordTime":	0,
+			"MaxCountLength":	100,
+			"NumMolTypeObs":	2,
+			"MolObsID":	[0, 1],
+			"bRecordPos":	[0, 0]
+		}, {
+			"ID":	6,
+			"bRecordTime":	0,
+			"MaxCountLength":	100,
+			"NumMolTypeObs":	2,
+			"MolObsID":	[0, 1],
+			"bRecordPos":	[0, 0]
+		}, {
+			"ID":	7,
+			"bRecordTime":	0,
+			"MaxCountLength":	100,
+			"NumMolTypeObs":	2,
+			"MolObsID":	[0, 1],
+			"bRecordPos":	[0, 0]
+		}, {
+			"ID":	8,
+			"bRecordTime":	0,
+			"MaxCountLength":	100,
+			"NumMolTypeObs":	2,
+			"MolObsID":	[0, 1],
+			"bRecordPos":	[0, 0]
+		}],
+	"EndTime":	"2025-06-11 09:21:59",
+	"RunTime":	0.590005
+}

@@ -1,0 +1,21 @@
+{
+	"ConfigFile":	"accord_config_sample_reactor.txt",
+	"SEED":	1,
+	"NumRepeat":	1,
+	"StartTime":	"2025-06-11 09:22:02"
+}
+{
+	"NumberActiveRecord":	0,
+	"ActiveInfo":	[],
+	"NumberPassiveRecord":	1,
+	"RecordInfo":	[{
+			"ID":	0,
+			"bRecordTime":	0,
+			"MaxCountLength":	1000,
+			"NumMolTypeObs":	1,
+			"MolObsID":	[0],
+			"bRecordPos":	[0]
+		}],
+	"EndTime":	"2025-06-11 09:22:02",
+	"RunTime":	0.000245
+}

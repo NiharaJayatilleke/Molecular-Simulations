@@ -1,0 +1,92 @@
+{
+  "Description": "Ethanol diffusion from point transmitter to spherical passive receiver, 1m apart",
+  "Output Filename": "ethanol_diffusion_test",
+  "Warning Override": true,
+  "Simulation Control": {
+    "Number of Repeats": 1,
+    "Final Simulation Time": 20.0,
+    "Global Microscopic Time Step": 0.01,
+    "Random Number Seed": 1,
+    "Max Number of Progress Updates": 10
+  },
+  "Chemical Properties": {
+    "Number of Molecule Types": 1,
+    "Diffusion Coefficients": [1.24e-9],
+    "Global Flow Type": "None",
+    "Global Flow Vector": [0, 0, 0],
+    "Does Molecule Type Flow?": [false],
+    "Chemical Reaction Specification": []
+  },
+  "Environment": {
+    "Subvolume Base Size": 1e-3,
+    "Region Specification": [
+      {
+        "Notes": "Microscopic cubic world, centered at origin",
+      "Label": "World",
+      "Parent Label": "",
+      "Shape": "Rectangular Box",
+      "Type": "Normal",
+      "Dimensions": [2.0, 2.0, 2.0],
+      "Anchor": [-1.0, -1.0, -1.0],
+      "Default Diffusion Coefficients": [true],
+      "Default Regime": "Microscopic",
+      "Is Region Microscopic?": true,
+      "Integer Subvolume Size": 1,
+      "Anchor Coordinate": [1.0, 0.0, 0.0],
+      "Number of Subvolumes Along X": 2000,
+      "Number of Subvolumes Along Y": 2000,
+      "Number of Subvolumes Along Z": 2000
+      },
+      {
+        "Notes": "Spherical receiver inside World",
+        "Label": "RX",
+        "Parent Label": "World",
+        "Shape": "Sphere",
+        "Type": "Normal",
+        "Anchor X Coordinate": 1.0,
+        "Anchor Y Coordinate": 0.0,
+        "Anchor Z Coordinate": 0.0,
+        "Radius": 0.05,
+        "Is Region Microscopic?": true
+      }
+    ],
+    "Actor Specification": [
+      {
+        "Notes": "Point transmitter at origin",
+        "Is Location Defined by Regions": false,
+        "Shape": "Point",
+        "Outer Boundary": [0.0, 0.0, 0.0],
+        "Is Actor Active": true,
+        "Start Time": 0.0,
+        "Is There Max Number of Actions": false,
+        "Is Actor Independent": true,
+        "Action Interval": 1e9999,
+        "Is Actor Activity Recorded": true,
+        "Random Number of Molecules?": false,
+        "Random Molecule Release Times?": false,
+        "Release Interval": 0,
+        "Slot Interval": 0,
+        "Bits Random?": false,
+        "Bit Sequence": [1],
+        "Modulation Scheme": "CSK",
+        "Modulation Bits": 1,
+        "Modulation Strength": 1000,
+        "Is Molecule Type Released?": [true]
+      },
+      {
+        "Notes": "Passive spherical observer at RX region",
+        "Is Location Defined by Regions": true,
+        "List of Regions Defining Location": ["RX"],
+        "Is Actor Active": false,
+        "Start Time": 0.0,
+        "Is There Max Number of Actions": false,
+        "Is Actor Independent": true,
+        "Action Interval": 0.1,
+        "Is Actor Activity Recorded": true,
+        "Is Time Recorded with Activity?": false,
+        "Is Molecule Type Observed?": [true],
+        "Is Molecule Position Observed?": [false]
+      }
+    ]
+  }
+}

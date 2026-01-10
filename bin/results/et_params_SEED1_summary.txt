@@ -1,0 +1,24 @@
+{
+	"ConfigFile":	"../config/et_params.txt",
+	"SEED":	1,
+	"NumRepeat":	1,
+	"StartTime":	"2026-01-06 13:50:10"
+}
+{
+	"NumberActiveRecord":	1,
+	"ActiveInfo":	[{
+			"ID":	0,
+			"MaxBitLength":	6
+		}],
+	"NumberPassiveRecord":	1,
+	"RecordInfo":	[{
+			"ID":	1,
+			"bRecordTime":	0,
+			"MaxCountLength":	10000,
+			"NumMolTypeObs":	1,
+			"MolObsID":	[1],
+			"bRecordPos":	[0]
+		}],
+	"EndTime":	"2026-01-06 13:50:10",
+	"RunTime":	0.012338
+}

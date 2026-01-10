@@ -1,0 +1,119 @@
+{
+  "Notes": "Scaled (alpha=3e-3) AcCoRD config for 30 cm -> 0.0009 m mapping. D kept constant.",
+  "Output Filename": "distance_120",
+  "Warning Override": false,
+  "Simulation Control": {
+    "Number of Repeats": 1,
+    "Final Simulation Time": 0.03,
+    "Global Microscopic Time Step": 1e-6,
+    "Random Number Seed": 1,
+    "Max Number of Progress Updates": 100
+  },
+  "Chemical Properties": {
+    "Number of Molecule Types": 2,
+    "Diffusion Coefficients": [2e-5, 0],
+    "Global Flow Type": "None",
+    "Chemical Reaction Specification": [
+      {
+        "Label": "Conversion",
+        "Is Reaction Reversible?": true,
+        "Reverse Reaction Label": "Reverse",
+        "Surface Reaction?": true,
+        "Surface Reaction Type": "Absorbing",
+        "Surface Transition Probability": "Steady State",
+        "Default Everywhere?": false,
+        "Exception Regions": ["Receiver"],
+        "Reactants": [1, 0],
+        "Products": [0, 1],
+        "Products Released?": [false, false],
+        "Reaction Rate": 40000000.0
+      },
+      {
+        "Label": "Reverse",
+        "Is Reaction Reversible?": true,
+        "Reverse Reaction Label": "Conversion",
+        "Surface Reaction?": true,
+        "Surface Reaction Type": "Desorbing",
+        "Surface Transition Probability": "Steady State",
+        "Default Everywhere?": false,
+        "Exception Regions": ["Receiver"],
+        "Reactants": [0, 1],
+        "Products": [1, 0],
+        "Products Released?": [true, false],
+        "Release Placement Type": "Steady State Diffusion",
+        "Reaction Rate": 200000000.0
+      }
+    ]
+  },
+  "Environment": {
+    "Subvolume Base Size": 1e-7,
+    "Region Specification": [
+      {
+        "Label": "A",
+        "Parent Label": "",
+        "Shape": "Sphere",
+        "Type": "Normal",
+        "Anchor Coordinate": [0, 0, 0],
+        "Radius": 1e9999
+      },
+      {
+        "Label": "Receiver",
+        "Parent Label": "A",
+        "Shape": "Sphere",
+        "Type": "3D Surface",
+        "Surface Type": "Outer",
+        "Anchor Coordinate": [0, 3.6e-3, 0],
+        "Radius": 5e-5
+      }
+    ],
+    "Actor Specification": [
+      {
+        "Is Location Defined by Regions?": false,
+        "Shape": "Point",
+        "Outer Boundary": [0, 0, 0],
+        "Is Actor Active?": true,
+        "Start Time": 0,
+        "Is There Max Number of Actions?": false,
+        "Is Actor Independent?": true,
+        "Action Interval": 0.002,
+        "Is Actor Activity Recorded?": true,
+        "Random Number of Molecules?": true,
+        "Random Molecule Release Times?": true,
+        "Release Interval": 0.002,
+        "Bits Random?": false,
+        "Bit Sequence": [1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1],
+        "Modulation Scheme": "CSK",
+        "Modulation Bits": 2,
+        "Modulation Strength": 1000000,
+        "Is Molecule Type Released?": [true, false]
+      },
+      {
+        "Is Location Defined by Regions?": true,
+        "List of Regions Defining Location": ["Receiver"],
+        "Is Actor Active?": false,
+        "Start Time": 1e-10,
+        "Is There Max Number of Actions?": false,
+        "Is Actor Independent?": true,
+        "Action Interval": 1e-4,
+        "Is Actor Activity Recorded?": true,
+        "Is Time Recorded with Activity?": false,
+        "Is Molecule Type Observed?": [false, true],
+        "Is Molecule Position Observed?": [false, false]
+      },
+      {
+        "Is Location Defined by Regions?": false,
+        "Shape": "Sphere",
+        "Outer Boundary": [0, 0, 0, 1e9999],
+        "Is Actor Active?": false,
+        "Start Time": 1e-10,
+        "Is There Max Number of Actions?": false,
+        "Is Actor Independent?": true,
+        "Action Interval": 1e-4,
+        "Is Actor Activity Recorded?": true,
+        "Is Time Recorded with Activity?": false,
+        "Is Molecule Type Observed?": [true, false],
+        "Is Molecule Position Observed?": [false, false]
+      }
+    ]
+  }
+}

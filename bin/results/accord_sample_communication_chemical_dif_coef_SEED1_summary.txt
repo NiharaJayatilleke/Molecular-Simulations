@@ -1,0 +1,38 @@
+{
+	"ConfigFile":	"../config/accord_config_sample_communication_chemical_dif_coef.txt",
+	"SEED":	1,
+	"NumRepeat":	1,
+	"StartTime":	"2025-10-21 14:05:15"
+}
+{
+	"NumberActiveRecord":	1,
+	"ActiveInfo":	[{
+			"ID":	0,
+			"MaxBitLength":	22
+		}],
+	"NumberPassiveRecord":	3,
+	"RecordInfo":	[{
+			"ID":	1,
+			"bRecordTime":	0,
+			"MaxCountLength":	1000,
+			"NumMolTypeObs":	1,
+			"MolObsID":	[0],
+			"bRecordPos":	[0]
+		}, {
+			"ID":	2,
+			"bRecordTime":	0,
+			"MaxCountLength":	1000,
+			"NumMolTypeObs":	1,
+			"MolObsID":	[1],
+			"bRecordPos":	[0]
+		}, {
+			"ID":	3,
+			"bRecordTime":	0,
+			"MaxCountLength":	1000,
+			"NumMolTypeObs":	1,
+			"MolObsID":	[0],
+			"bRecordPos":	[0]
+		}],
+	"EndTime":	"2025-10-21 14:05:15",
+	"RunTime":	0.051200
+}
