@@ -57,10 +57,13 @@ else
 end
 
 customFigProp = [];
+customFigProp.Color = 'w'; 
+
 % Change axes properties to favor curve plotting over video
 customAxesProp.Visible = 'on';
 customAxesProp.Projection = 'orthographic';
 customAxesProp.Clipping = 'on';
+customAxesProp.Color = 'w'; 
 
 customObsProp = [];
 
