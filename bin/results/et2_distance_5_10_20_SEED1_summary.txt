@@ -1,0 +1,38 @@
+{
+	"ConfigFile":	"/Users/nihara/Downloads/AcCoRD-1.4.2/config/et2_distance_5_10_20.txt",
+	"SEED":	1,
+	"NumRepeat":	1,
+	"StartTime":	"2026-01-13 08:32:33"
+}
+{
+	"NumberActiveRecord":	1,
+	"ActiveInfo":	[{
+			"ID":	0,
+			"MaxBitLength":	48
+		}],
+	"NumberPassiveRecord":	3,
+	"RecordInfo":	[{
+			"ID":	1,
+			"bRecordTime":	0,
+			"MaxCountLength":	7860,
+			"NumMolTypeObs":	1,
+			"MolObsID":	[0],
+			"bRecordPos":	[0]
+		}, {
+			"ID":	2,
+			"bRecordTime":	0,
+			"MaxCountLength":	7860,
+			"NumMolTypeObs":	1,
+			"MolObsID":	[0],
+			"bRecordPos":	[0]
+		}, {
+			"ID":	3,
+			"bRecordTime":	0,
+			"MaxCountLength":	7860,
+			"NumMolTypeObs":	1,
+			"MolObsID":	[0],
+			"bRecordPos":	[0]
+		}],
+	"EndTime":	"2026-01-13 09:00:42",
+	"RunTime":	1620.285076
+}
