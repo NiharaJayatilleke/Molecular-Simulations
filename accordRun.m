@@ -2,20 +2,23 @@ function data = accordRun(filename)
 % accordRun - Import and plot AcCoRD simulation results in one command
 %   data = accordRun('accord_sample_communication_chemical_dif_coef')
 %
-%   This combines accordImport and accordQuickPlot into a single call.
+%   This is a launcher script in the root folder that sets up paths
+%   and calls the main accordRun function in the matlab folder.
 
-    % Ensure matlab and JSONlab folders are on path
-    [thisDir, ~, ~] = fileparts(mfilename('fullpath'));
-    accordRoot = fullfile(thisDir, '..');
-    addpath(thisDir);
+    % Get the root directory (where this script lives)
+    [accordRoot, ~, ~] = fileparts(mfilename('fullpath'));
+    
+    % Add required paths
+    addpath(fullfile(accordRoot, 'matlab'));
     addpath(fullfile(accordRoot, 'JSONlab'));
+    
+    % Change to AcCoRD root directory
     cd(accordRoot);
     
-    fprintf('AcCoRD paths loaded. Use accordRun(filename) to import and plot.\n');
-    fprintf('Example: data = accordRun(''accord_sample_communication_chemical_dif_coef'');\n');
+    fprintf('AcCoRD paths loaded.\n');
     
     % Build file paths
-    resultsPath = fullfile(thisDir, '..', 'bin', 'results', filename);
+    resultsPath = fullfile(accordRoot, 'bin', 'results', filename);
     outputFile = [filename '_out'];
     
     % Import data
