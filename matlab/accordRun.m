@@ -4,9 +4,15 @@ function data = accordRun(filename)
 %
 %   This combines accordImport and accordQuickPlot into a single call.
 
-    % Ensure matlab folder is on path
+    % Ensure matlab and JSONlab folders are on path
     [thisDir, ~, ~] = fileparts(mfilename('fullpath'));
+    accordRoot = fullfile(thisDir, '..');
     addpath(thisDir);
+    addpath(fullfile(accordRoot, 'JSONlab'));
+    cd(accordRoot);
+    
+    fprintf('AcCoRD paths loaded. Use accordRun(filename) to import and plot.\n');
+    fprintf('Example: data = accordRun(''accord_sample_communication_chemical_dif_coef'');\n');
     
     % Build file paths
     resultsPath = fullfile(thisDir, '..', 'bin', 'results', filename);
