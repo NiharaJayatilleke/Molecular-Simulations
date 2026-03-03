@@ -1,7 +1,7 @@
 {
-  "Notes": "Simplified version to observe CSK transmission using a passive receiver at 20cm.",
+  "Notes": "Simplified version to observe CSK transmission using a passive receiver at 10cm.",
   "Description": "Transmitter sends CSK-modulated bit sequence; only receiver is observed for molecule counts.",
-  "Output Filename": "et1_distance_20",
+  "Output Filename": "et1_distance_10",
   "Warning Override": false,
   "Simulation Control": {
     "Number of Repeats": 1,
@@ -53,10 +53,10 @@
         "Is Molecule Type Released?": [true]
       },
       {
-        "Notes": "Receiver observer at 20cm.",
+        "Notes": "Receiver observer at 10cm.",
         "Is Location Defined by Regions?": false,
         "Shape": "Sphere",
-        "Outer Boundary": [0, 2e-1, 0, 3e-2],
+        "Outer Boundary": [0, 1e-1, 0, 3e-2],
         "Is Actor Active?": false,
         "Start Time": 1e-10,
         "Is There Max Number of Actions?": false,

@@ -1,11 +1,11 @@
 {
-  "Notes": "Simplified version to observe CSK transmission using a passive receiver at 20cm.",
+  "Notes": "Simplified version to observe CSK transmission using a passive receiver at 50cm.",
   "Description": "Transmitter sends CSK-modulated bit sequence; only receiver is observed for molecule counts.",
-  "Output Filename": "et1_distance_20",
+  "Output Filename": "et1_distance_50",
   "Warning Override": false,
   "Simulation Control": {
     "Number of Repeats": 1,
-    "Final Simulation Time": 9000.0,
+    "Final Simulation Time": 20000.0,
     "Global Microscopic Time Step": 2.0,
     "Random Number Seed": 1,
     "Max Number of Progress Updates": 100
@@ -32,7 +32,7 @@
     ],
     "Actor Specification": [
       {
-        "Notes": "Point Transmitter using CSK, releases molecules at 300s intervals.",
+        "Notes": "Point Transmitter using CSK, releases molecules at 600s intervals with 1e6 modulation strength.",
         "Is Location Defined by Regions?": false,
         "Shape": "Point",
         "Outer Boundary": [0, 0, 0],
@@ -40,7 +40,7 @@
         "Start Time": 0,
         "Is There Max Number of Actions?": false,
         "Is Actor Independent?": true,
-        "Action Interval": 300.0,
+        "Action Interval": 600.0,
         "Is Actor Activity Recorded?": true,
         "Random Number of Molecules?": true,
         "Random Molecule Release Times?": true,
@@ -53,10 +53,10 @@
         "Is Molecule Type Released?": [true]
       },
       {
-        "Notes": "Receiver observer at 20cm.",
+        "Notes": "Receiver observer at 50cm, with radius 5cm",
         "Is Location Defined by Regions?": false,
         "Shape": "Sphere",
-        "Outer Boundary": [0, 2e-1, 0, 3e-2],
+        "Outer Boundary": [0, 5e-1, 0, 3e-2],
         "Is Actor Active?": false,
         "Start Time": 1e-10,
         "Is There Max Number of Actions?": false,
