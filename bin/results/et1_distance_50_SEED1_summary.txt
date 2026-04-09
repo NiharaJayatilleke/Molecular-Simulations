@@ -2,7 +2,7 @@
 	"ConfigFile":	"/Users/nihara/Downloads/AcCoRD-1.4.2/config/et1_distance_50.txt",
 	"SEED":	1,
 	"NumRepeat":	1,
-	"StartTime":	"2026-03-01 18:16:19"
+	"StartTime":	"2026-03-23 12:31:18"
 }
 {
 	"NumberActiveRecord":	1,
@@ -14,11 +14,11 @@
 	"RecordInfo":	[{
 			"ID":	1,
 			"bRecordTime":	0,
-			"MaxCountLength":	10000,
+			"MaxCountLength":	5000,
 			"NumMolTypeObs":	1,
 			"MolObsID":	[0],
 			"bRecordPos":	[0]
 		}],
-	"EndTime":	"2026-03-01 18:45:52",
-	"RunTime":	1770.344144
+	"EndTime":	"2026-03-23 13:57:28",
+	"RunTime":	885.505184
 }
