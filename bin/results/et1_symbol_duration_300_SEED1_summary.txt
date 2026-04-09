@@ -1,0 +1,24 @@
+{
+	"ConfigFile":	"/Users/nihara/Downloads/AcCoRD-1.4.2/config/et1_symbol_duration_300.txt",
+	"SEED":	1,
+	"NumRepeat":	1,
+	"StartTime":	"2026-02-25 18:19:44"
+}
+{
+	"NumberActiveRecord":	1,
+	"ActiveInfo":	[{
+			"ID":	0,
+			"MaxBitLength":	27
+		}],
+	"NumberPassiveRecord":	1,
+	"RecordInfo":	[{
+			"ID":	1,
+			"bRecordTime":	0,
+			"MaxCountLength":	4000,
+			"NumMolTypeObs":	1,
+			"MolObsID":	[0],
+			"bRecordPos":	[0]
+		}],
+	"EndTime":	"2026-02-25 18:29:15",
+	"RunTime":	570.157748
+}

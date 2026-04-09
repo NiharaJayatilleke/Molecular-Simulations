@@ -1,0 +1,24 @@
+{
+	"ConfigFile":	"/Users/nihara/Downloads/AcCoRD-1.4.2/config/et3_distance_30.txt",
+	"SEED":	1,
+	"NumRepeat":	1,
+	"StartTime":	"2026-03-01 19:19:48"
+}
+{
+	"NumberActiveRecord":	1,
+	"ActiveInfo":	[{
+			"ID":	0,
+			"MaxBitLength":	6
+		}],
+	"NumberPassiveRecord":	1,
+	"RecordInfo":	[{
+			"ID":	1,
+			"bRecordTime":	0,
+			"MaxCountLength":	1860,
+			"NumMolTypeObs":	1,
+			"MolObsID":	[0],
+			"bRecordPos":	[0]
+		}],
+	"EndTime":	"2026-03-01 19:21:00",
+	"RunTime":	71.642764
+}

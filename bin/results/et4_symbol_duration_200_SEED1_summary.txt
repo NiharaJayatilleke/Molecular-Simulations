@@ -1,0 +1,24 @@
+{
+	"ConfigFile":	"/Users/nihara/Downloads/AcCoRD-1.4.2/config/et4_symbol_duration_200.txt",
+	"SEED":	1,
+	"NumRepeat":	1,
+	"StartTime":	"2026-03-10 12:31:30"
+}
+{
+	"NumberActiveRecord":	1,
+	"ActiveInfo":	[{
+			"ID":	0,
+			"MaxBitLength":	32
+		}],
+	"NumberPassiveRecord":	1,
+	"RecordInfo":	[{
+			"ID":	1,
+			"bRecordTime":	0,
+			"MaxCountLength":	4000,
+			"NumMolTypeObs":	1,
+			"MolObsID":	[0],
+			"bRecordPos":	[0]
+		}],
+	"EndTime":	"2026-03-10 12:41:26",
+	"RunTime":	595.110784
+}
