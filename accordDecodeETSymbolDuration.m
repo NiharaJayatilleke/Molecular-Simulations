@@ -99,7 +99,8 @@ function results = accordDecodeETSymbolDuration(etLabel)
             continue;
         end
         tx_text  = text(tx_start(1):pa_start(1)-1);
-        tx_bits  = sscanf(tx_text, '%*[^0-1]%d');
+        tx_text  = regexprep(tx_text, '^ActiveActor\s+0:\s*', '');
+        tx_bits  = sscanf(tx_text, '%d');
         num_symbols = length(tx_bits);
 
         % ---- received counts (single passive actor) ----
@@ -116,14 +117,22 @@ function results = accordDecodeETSymbolDuration(etLabel)
         count_text = rx_text(cIdx(1):end);
         rx_counts  = sscanf(count_text, '%*[^0-9]%d');
 
+        % Trim everything beyond the transmission window first.
+        rx_trimmed = rx_counts(1:min(num_symbols * samples_per_symbol, length(rx_counts)));
+
+        % Pad with zeros if simulation ended before transmission window completed.
+        if length(rx_trimmed) < num_symbols * samples_per_symbol
+            fprintf('Note: RX signal shorter than transmission window in %s. Zero-padding %d missing samples.\n', ...
+                listing(k).name, num_symbols * samples_per_symbol - length(rx_trimmed));
+            rx_trimmed(end+1 : num_symbols * samples_per_symbol) = 0;
+        end
+
         % ---- peak per symbol period ----
         peak = zeros(num_symbols, 1);
         for s = 1:num_symbols
             si = (s-1)*samples_per_symbol + 1;
             ei = s*samples_per_symbol;
-            if ei <= length(rx_counts)
-                peak(s) = max(rx_counts(si:ei));
-            end
+            peak(s) = max(rx_trimmed(si:ei));
         end
 
         % ---- threshold (mean of 0-symbol peaks + mean of 1-symbol peaks) / 2 ----
@@ -146,7 +155,7 @@ function results = accordDecodeETSymbolDuration(etLabel)
         results(k).num_errors      = num_errors;
         results(k).num_bits        = num_symbols;
         results(k).peak_per_symbol = peak;
-        results(k).rx_counts       = rx_counts;
+        results(k).rx_counts       = rx_trimmed;
 
         % ---- print ----
         fprintf('Samples/symbol: %d\n', samples_per_symbol);

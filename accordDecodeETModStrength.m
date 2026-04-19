@@ -113,7 +113,8 @@ function results = accordDecodeETModStrength(etLabel)
             continue;
         end
         tx_text  = text(tx_start(1):pa_start(1)-1);
-        tx_bits  = sscanf(tx_text, '%*[^0-1]%d');
+        tx_text  = regexprep(tx_text, '^ActiveActor\s+0:\s*', '');
+        tx_bits  = sscanf(tx_text, '%d');
         num_symbols = length(tx_bits);
 
         % ---- received counts (single passive actor) ----
@@ -135,32 +136,22 @@ function results = accordDecodeETModStrength(etLabel)
             continue;
         end
 
-        % Trim RX signal to symbol-aligned windows from the start.
-        % Any trailing samples beyond full symbol windows are ignored.
-        num_full_windows = floor(length(rx_counts) / samples_per_symbol);
-        if num_full_windows <= 0
-            warning('RX signal too short in %s: got %d samples (< %d).', ...
-                listing(k).name, length(rx_counts), samples_per_symbol);
-            continue;
-        end
+        % Trim everything beyond the transmission window first.
+        rx_trimmed = rx_counts(1:min(num_symbols * samples_per_symbol, length(rx_counts)));
 
-        if num_full_windows < num_symbols
-            warning(['RX shorter than TX in %s: TX symbols=%d, decodable symbols=%d. ' ...
-                     'Decoding first %d symbols only.'], ...
-                     listing(k).name, num_symbols, num_full_windows, num_full_windows);
-            num_symbols = num_full_windows;
-            tx_bits = tx_bits(1:num_symbols);
+        % Pad with zeros if simulation ended before transmission window completed.
+        if length(rx_trimmed) < num_symbols * samples_per_symbol
+            fprintf('Note: RX signal shorter than transmission window in %s. Zero-padding %d missing samples.\n', ...
+                listing(k).name, num_symbols * samples_per_symbol - length(rx_trimmed));
+            rx_trimmed(end+1 : num_symbols * samples_per_symbol) = 0;
         end
-
-        num_rx_needed = num_symbols * samples_per_symbol;
-        rx_counts = rx_counts(1:num_rx_needed);
 
         % ---- peak per symbol period ----
         peak = zeros(num_symbols, 1);
         for s = 1:num_symbols
             si = (s-1)*samples_per_symbol + 1;
             ei = s*samples_per_symbol;
-            peak(s) = max(rx_counts(si:ei));
+            peak(s) = max(rx_trimmed(si:ei));
         end
 
         % ---- threshold (mean of 0-symbol peaks + mean of 1-symbol peaks) / 2 ----
@@ -178,14 +169,14 @@ function results = accordDecodeETModStrength(etLabel)
         % ---- store ----
         results(k).threshold       = threshold;
         results(k).samples_per_symbol = samples_per_symbol;
-        results(k).num_rx_samples  = length(rx_counts);
+        results(k).num_rx_samples  = length(rx_trimmed);
         results(k).decoded_bits    = decoded;
         results(k).tx_bits         = tx_bits;
         results(k).BER             = BER;
         results(k).num_errors      = num_errors;
         results(k).num_bits        = num_symbols;
         results(k).peak_per_symbol = peak;
-        results(k).rx_counts       = rx_counts;
+        results(k).rx_counts       = rx_trimmed;
 
         % ---- print ----
         fprintf('TX bits (%d): ', num_symbols);

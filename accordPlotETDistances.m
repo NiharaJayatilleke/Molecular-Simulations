@@ -7,7 +7,7 @@ function [hFig, results] = accordPlotETDistances(etLabel)
 % showing the full molecule count time-series on a single graph.
 %
 % INPUTS
-%   etLabel - encoding technique label, e.g. 'et1', 'et2', ..., 'et5'
+%   etLabel - encoding technique label, e.g. 'et1', 'et2', ..., 'et6'
 %
 % OUTPUTS
 %   hFig    - figure handle
