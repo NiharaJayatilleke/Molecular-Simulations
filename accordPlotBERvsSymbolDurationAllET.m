@@ -19,6 +19,7 @@ function [hFig, allResults] = accordPlotBERvsSymbolDurationAllET()
     cd(accordRoot);
 
     etLabels = {'et1', 'et2', 'et3', 'et4', 'et5'};
+    legendLabels = {'ET1 - ISI-mtg', 'ET2 - RLIM', 'ET3 - Mod. Huffman', 'ET4 - (4,2,1)', 'ET5 - SEC'};
     numET    = length(etLabels);
 
     % --- colours ---
@@ -27,6 +28,7 @@ function [hFig, allResults] = accordPlotBERvsSymbolDurationAllET()
                0.93 0.69 0.13;   % yellow-gold
                0.49 0.18 0.56;   % purple
                0.47 0.67 0.19];  % green
+    markerStyles = {'o', 's', 'd', '^', 'v'};
 
     allResults = cell(1, numET);
 
@@ -76,31 +78,37 @@ function [hFig, allResults] = accordPlotBERvsSymbolDurationAllET()
         [durations, si] = sort(durations);
         bers = bers(si);
 
-        % Plot raw points
-        plot(ax, durations, bers, 'o', ...
-            'Color', colours(i,:), 'MarkerSize', 7, ...
-            'MarkerFaceColor', colours(i,:), 'MarkerEdgeColor', 'w', ...
-            'HandleVisibility', 'off');
-
         % Smooth curve if enough points
         if numel(durations) >= 3
             xFine = linspace(min(durations), max(durations), 200);
             yFine = interp1(durations, bers, xFine, 'pchip');
-            h = plot(ax, xFine, yFine, '-', 'Color', colours(i,:), 'LineWidth', 1.8);
+            markerIdx = unique([1, 1:20:numel(xFine), numel(xFine)]);
+            h = plot(ax, xFine, yFine, ...
+                'LineStyle', '-', ...
+                'Marker', markerStyles{i}, ...
+                'MarkerIndices', markerIdx, ...
+                'Color', colours(i,:), 'LineWidth', 1.4, ...
+                'MarkerSize', 8, ...
+                'MarkerFaceColor', 'w', 'MarkerEdgeColor', colours(i,:));
         else
-            h = plot(ax, durations, bers, '-', 'Color', colours(i,:), 'LineWidth', 1.8);
+            h = plot(ax, durations, bers, ...
+                'LineStyle', '-', ...
+                'Marker', markerStyles{i}, ...
+                'Color', colours(i,:), 'LineWidth', 1.4, ...
+                'MarkerSize', 8, ...
+                'MarkerFaceColor', 'w', 'MarkerEdgeColor', colours(i,:));
         end
 
         plotHandles(i) = h(1);
-        legendEntries{i} = upper(etLabels{i});
+        legendEntries{i} = legendLabels{i};
     end
 
     hold(ax, 'off');
 
     xlabel(ax, 'Symbol Duration (s)', 'FontSize', 12);
     ylabel(ax, 'Bit Error Rate (BER)', 'FontSize', 12);
-    title(ax, 'BER vs Symbol Duration for All Encoding Techniques', ...
-        'FontSize', 14, 'FontWeight', 'bold');
+    % title(ax, 'BER vs Symbol Duration for All Encoding Techniques', ...
+        % 'FontSize', 14, 'FontWeight', 'bold');
 
     validH = plotHandles ~= 0 & isvalid(plotHandles);
     if any(validH)

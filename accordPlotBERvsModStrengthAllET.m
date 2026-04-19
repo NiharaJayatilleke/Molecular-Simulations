@@ -18,8 +18,9 @@ function [hFig, allResults] = accordPlotBERvsModStrengthAllET()
     addpath(fullfile(accordRoot, 'JSONlab'));
     cd(accordRoot);
 
-    etLabels = {'et1', 'et2', 'et3', 'et4', 'et5'};
-    numET    = length(etLabels);
+    etLabels     = {'et1',       'et2',   'et3',           'et4',     'et5'};
+    legendLabels = {'ET1 - ISI-mtg',   'ET2 - RLIM',  'ET3 - Mod. Huffman',  'ET4 - (4,2,1)', 'ET5 - SEC'};
+    numET        = length(etLabels);
 
     % --- colours ---
     colours = [0.00 0.45 0.74;   % blue
@@ -27,6 +28,7 @@ function [hFig, allResults] = accordPlotBERvsModStrengthAllET()
                0.93 0.69 0.13;   % yellow-gold
                0.49 0.18 0.56;   % purple
                0.47 0.67 0.19];  % green
+    markerStyles = {'o', 's', 'd', '^', 'v'};
 
     allResults = cell(1, numET);
 
@@ -76,23 +78,29 @@ function [hFig, allResults] = accordPlotBERvsModStrengthAllET()
         [modVals, si] = sort(modVals);
         bers = bers(si);
 
-        % Plot raw points
-        plot(ax, modVals, bers, 'o', ...
-            'Color', colours(i,:), 'MarkerSize', 7, ...
-            'MarkerFaceColor', colours(i,:), 'MarkerEdgeColor', 'w', ...
-            'HandleVisibility', 'off');
-
         % Smooth curve if enough points
         if numel(modVals) >= 3
             xFine = logspace(log10(min(modVals)), log10(max(modVals)), 200);
             yFine = interp1(modVals, bers, xFine, 'pchip');
-            h = plot(ax, xFine, yFine, '-', 'Color', colours(i,:), 'LineWidth', 1.8);
+            markerIdx = unique([1, 1:20:numel(xFine), numel(xFine)]);
+            h = plot(ax, xFine, yFine, ...
+                'LineStyle', '-', ...
+                'Marker', markerStyles{i}, ...
+                'MarkerIndices', markerIdx, ...
+                'Color', colours(i,:), 'LineWidth', 1.4, ...
+                'MarkerSize', 8, ...
+                'MarkerFaceColor', 'w', 'MarkerEdgeColor', colours(i,:));
         else
-            h = plot(ax, modVals, bers, '-', 'Color', colours(i,:), 'LineWidth', 1.8);
+            h = plot(ax, modVals, bers, ...
+                'LineStyle', '-', ...
+                'Marker', markerStyles{i}, ...
+                'Color', colours(i,:), 'LineWidth', 1.4, ...
+                'MarkerSize', 8, ...
+                'MarkerFaceColor', 'w', 'MarkerEdgeColor', colours(i,:));
         end
 
         plotHandles(i) = h(1);
-        legendEntries{i} = upper(etLabels{i});
+        legendEntries{i} = legendLabels{i};
     end
 
     hold(ax, 'off');
@@ -100,8 +108,8 @@ function [hFig, allResults] = accordPlotBERvsModStrengthAllET()
     set(ax, 'XScale', 'log');
     xlabel(ax, 'Modulation Strength (molecules)', 'FontSize', 12);
     ylabel(ax, 'Bit Error Rate (BER)', 'FontSize', 12);
-    title(ax, 'BER vs Modulation Strength for All Encoding Techniques', ...
-        'FontSize', 14, 'FontWeight', 'bold');
+    % title(ax, 'BER vs Modulation Strength for All Encoding Techniques', ...
+        % 'FontSize', 14, 'FontWeight', 'bold');
 
     validH = isgraphics(plotHandles);
     if any(validH)

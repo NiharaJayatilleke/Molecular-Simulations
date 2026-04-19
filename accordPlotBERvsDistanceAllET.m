@@ -1,10 +1,17 @@
 function [hFig, allResults] = accordPlotBERvsDistanceAllET()
-% accordPlotBERvsDistanceAllET - Plot BER vs Distance for all 5 encoding techniques
+% accordPlotBERvsDistanceAllET - Plot BER vs Distance for selected encoding techniques
 %
 %   [hFig, allResults] = accordPlotBERvsDistanceAllET()
 %
-% Decodes all single-distance results for ET1–ET5 using accordDecodeET,
-% then plots BER (y-axis) vs Distance (x-axis) with 5 continuous curves.
+% Decodes single-distance results for ET1–ET5 using accordDecodeET,
+% then plots BER (y-axis) vs Distance (x-axis) with one curve per technique.
+%
+% Legend labels:
+%   ET1 -> ISI-mtg
+%   ET2 -> RLIM
+%   ET3 -> Mod. Huffman
+%   ET4 -> (4,2,1)
+%   ET5 -> SEC
 %
 % OUTPUTS
 %   hFig       - figure handle
@@ -16,25 +23,32 @@ function [hFig, allResults] = accordPlotBERvsDistanceAllET()
     addpath(fullfile(accordRoot, 'JSONlab'));
     cd(accordRoot);
 
-    etLabels = {'et1', 'et2', 'et3', 'et4', 'et5'};
-    numET    = length(etLabels);
+    etLabels     = {'et1',          'et2',    'et3',           'et4',       'et5'  };
+    legendLabels = {'ET1 - ISI-mtg','ET2 - RLIM','ET3 - Mod. Huffman','ET4 - (4,2,1)','ET5 - SEC'};
+    numET        = length(etLabels);
 
-    % --- colours ---
-    colours = [0.00 0.45 0.74;   % blue
-               0.85 0.33 0.10;   % orange
-               0.93 0.69 0.13;   % yellow-gold
-               0.49 0.18 0.56;   % purple
-               0.47 0.67 0.19];  % green
+    % --- colours (one per ET, in etLabels order) ---
+    colours = [0.00 0.45 0.74;   % blue        – ET1 / ISI-mtg
+               0.85 0.33 0.10;   % orange      – ET2 / RLIM
+               0.93 0.69 0.13;   % yellow-gold – ET3 / Mod. Huffman
+               0.49 0.18 0.56;   % purple      – ET4 / (4,2,1)
+               0.47 0.67 0.19];  % green       – ET5 / SEC
+    markerStyles = {'o', 's', 'd', '^', 'v'};
 
-    % --- decode all ETs ---
+    % --- decode selected ETs ---
     allResults = cell(1, numET);
     for i = 1:numET
         fprintf('\n########## %s ##########\n', upper(etLabels{i}));
-        allResults{i} = accordDecodeET(etLabels{i});
+        try
+            allResults{i} = accordDecodeET(etLabels{i});
+        catch ME
+            fprintf('Skipping %s: %s\n', upper(etLabels{i}), ME.message);
+            allResults{i} = struct([]);
+        end
     end
 
     % --- figure ---
-    hFig = figure('Color', 'w', 'Name', 'BER vs Distance – All Encoding Techniques', ...
+    hFig = figure('Color', 'w', 'Name', 'BER vs Distance – Selected Encoding Techniques', ...
         'Units', 'pixels', 'Position', [80 80 900 550]);
     ax = axes('Parent', hFig); hold(ax, 'on');
     set(ax, 'Color', 'w');
@@ -64,28 +78,36 @@ function [hFig, allResults] = accordPlotBERvsDistanceAllET()
         [distances, si] = sort(distances);
         bers = bers(si);
 
-        % Interpolate for smooth curve
-        dFine = linspace(min(distances), max(distances), 200);
-        bFine = interp1(distances, bers, dFine, 'pchip');
+        if numel(distances) >= 3
+            dFine = linspace(min(distances), max(distances), 200);
+            bFine = interp1(distances, bers, dFine, 'pchip');
+        else
+            dFine = distances;
+            bFine = bers;
+        end
 
-        % Plot smooth curve
+        % Smooth curve with separate markers for a cleaner publication look.
         h = plot(ax, dFine, bFine, '-', ...
-            'Color', colours(i,:), 'LineWidth', 1.8);
-        % Plot data points on top
-        plot(ax, distances, bers, 'o', ...
-            'Color', colours(i,:), 'MarkerSize', 7, ...
-            'MarkerFaceColor', colours(i,:), 'MarkerEdgeColor', 'w', ...
+            'Color', colours(i,:), 'LineWidth', 2.0);
+        plot(ax, distances, bers, ...
+            'LineStyle', 'none', ...
+            'Marker', markerStyles{i}, ...
+            'Color', colours(i,:), ...
+            'MarkerSize', 8, ...
+            'LineWidth', 1.2, ...
+            'MarkerFaceColor', 'w', ...
+            'MarkerEdgeColor', colours(i,:), ...
             'HandleVisibility', 'off');
-        plotHandles(i) = h(1);
-        legendEntries{i} = upper(etLabels{i});
+        plotHandles(i)   = h(1);
+        legendEntries{i} = legendLabels{i};
     end
 
     hold(ax, 'off');
 
     xlabel(ax, 'Distance (cm)', 'FontSize', 12);
     ylabel(ax, 'Bit Error Rate (BER)', 'FontSize', 12);
-    title(ax, 'BER vs Distance for All Encoding Techniques', ...
-        'FontSize', 14, 'FontWeight', 'bold');
+    % title(ax, 'BER vs Distance for All Encoding Techniques', ...
+        % 'FontSize', 14, 'FontWeight', 'bold');
 
     % Only include valid handles in legend
     validH = plotHandles ~= 0 & isvalid(plotHandles);
